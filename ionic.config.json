@@ -1,0 +1,7 @@
+{
+  "name": "IonicAppExten",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
