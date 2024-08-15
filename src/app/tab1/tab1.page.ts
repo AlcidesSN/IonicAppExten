@@ -32,17 +32,17 @@ export class Tab1Page implements OnInit{
     }
   personagem:Ficha|undefined;
   ficha:Ficha = {
-    hpAtual:10,
-    hpMax:10,
-    xpAtual:10,
-    xpNextNivel:10,
-    for:10,
-    des:10,
-    con:10,
-    int:10,
-    sab:10,
-    car:10,
-    pericias: this.pericias
+  hpAtual:0,
+  hpMax:0,
+  xpAtual:0,
+  xpNextNivel:0,
+  for:0,
+  des:0,
+  con:0,
+  int:0,
+  sab:0,
+  car:0,
+  pericias: this.pericias
   };
 
 
@@ -105,22 +105,53 @@ export class Tab1Page implements OnInit{
   }
 
   modAtributo(atributo:number):string{
-    return (Math.round((atributo - 10)/2)).toString()
+    return (Math.round((atributo - 10)/2)).toString();
   }
-  autualizarForm(){
+  salvarForm(){
     this.sheetForm.value['pericias'] = this.periciasForm.value;
     this.personagem = this.sheetForm.value;
+    console.log(this.sheetForm.value)
     this.storageProvider.set('ficha01', this.personagem);
+  }
+  atualizarForm(){
+    this.sheetForm.value['hpAtual'] = this.ficha.hpAtual;
+    this.sheetForm.value['hpMax'] = this.ficha.hpMax;
+    this.sheetForm.value['xpAtual'] = this.ficha.xpAtual;
+    this.sheetForm.value['xpNextNivel'] = this.ficha.xpNextNivel;
+    this.sheetForm.value['for'] = this.ficha.for;
+    this.sheetForm.value['des'] = this.ficha.des;
+    this.sheetForm.value['con'] = this.ficha.con;
+    this.sheetForm.value['int'] = this.ficha.int;
+    this.sheetForm.value['sab'] = this.ficha.sab;
+    this.sheetForm.value['car'] = this.ficha.car;
+    this.sheetForm.value['pericias'] = this.ficha.pericias;
+  }
+  criarForm(){
+    this.ficha.hpAtual = this.sheetForm.value['hpAtual'];
+    this.ficha.hpMax = this.sheetForm.value['hpMax'];
+    this.ficha.xpAtual = this.sheetForm.value['xpAtual'];
+    this.ficha.xpNextNivel = this.sheetForm.value['xpNextNivel']
+    this.ficha.for = this.sheetForm.value['for'];
+    this.ficha.des = this.sheetForm.value['des'];
+    this.ficha.con = this.sheetForm.value['con'];
+    this.ficha.int = this.sheetForm.value['int'];
+    this.ficha.sab = this.sheetForm.value['sab'];
+    this.ficha.car = this.sheetForm.value['car'];
+    this.ficha.pericias = this.sheetForm.value['pericias'];
   }
 
   ngOnInit(){
-
     this.storageProvider.getAll()
                                  .then((ficha) => this.ficha = ficha[0])
                                  .catch((err) => alert(err));
     this.initializePericias();
     this.initializeForm();
-    //this.autualizarForm();
+    if(this.ficha.xpNextNivel != 0 && this.ficha.xpAtual != 0){
+      this.atualizarForm();
+    }
+    else{
+      this.criarForm();
+    }
   }
 
 }

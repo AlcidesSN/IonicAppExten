@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-button (click)="autualizarForm()">salvar</ion-button>
+  <ion-button (click)="salvarForm()">salvar</ion-button>
   <form [formGroup]="sheetForm">
     <ion-grid>
       <ion-row>
@@ -174,79 +174,111 @@
             <ion-list>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="acrobacia">Acrobacia</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.acrobacia"
+                formControlName="acrobacia">Acrobacia
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="arcanismo">Arcanismo</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.arcanismo"
+                formControlName="arcanismo">Arcanismo
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="atletismo">Atletismo</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.atletismo"
+                formControlName="atletismo">Atletismo
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="atuacao">Atuacao</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.atuacao"
+                formControlName="atuacao">Atuacao
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="enganacao">Enganação</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.enganacao"
+                formControlName="enganacao">Enganação
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="furtividade">Furtividade</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.furtividade"
+                formControlName="furtividade">Furtividade
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="hitoria">hitoria</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.hitoria"
+                formControlName="hitoria">hitoria
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="intimidacao">Intimidação</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.intimidacao"
+                formControlName="intimidacao">Intimidação
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="intuicao">Intuição</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.intuicao"
+                formControlName="intuicao">Intuição
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="investigacao">investigação</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.investigacao"
+                formControlName="investigacao">investigação
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="lidarComAnimais">Lidar com Animais</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.lidarComAnimais"
+                formControlName="lidarComAnimais">Lidar com Animais
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="medicina">Medicina</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.medicina"
+                formControlName="medicina">Medicina
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="natureza">Natureza</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.natureza"
+                formControlName="natureza">Natureza
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="persepcao">Persepção</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.persepcao"
+                formControlName="persepcao">Persepção
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="persuasao">Persuasão</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.persuasao"
+                formControlName="persuasao">Persuasão
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="prestidigitacao">Prestidigitação</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.prestidigitacao"
+                formControlName="prestidigitacao">Prestidigitação
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="religiao">Religião</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.religiao"
+                formControlName="religiao">Religião
+              </ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="religiao">Religião</ion-checkbox>
-              </ion-item>
-              <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
-                <ion-checkbox formControlName="sobrevivencia">Sobrevivencia</ion-checkbox>
+                <ion-checkbox [checked]="ficha.pericias.sobrevivencia"
+                formControlName="sobrevivencia">Sobrevivencia
+              </ion-checkbox>
               </ion-item>
             </ion-list>
           </ion-col>
