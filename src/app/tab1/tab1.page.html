@@ -1,17 +1,257 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <ion-button (click)="autualizarForm()">salvar</ion-button>
+  <form [formGroup]="sheetForm">
+    <ion-grid>
+      <ion-row>
+        <!-- Imagem do personagem arredondada -->
+        <ion-col size="6">
+            <ion-img
+              [src]="imagemPersonagem"
+              alt="Imagem do personagem"
+            ></ion-img>
+        </ion-col>
+        <!-- Card com HP, Mana e XP alinhado à direita -->
+        <ion-col size="6">
+          <div style="margin-bottom: 10px;">
+            <div style="color: red;">
+              <ion-input label="HP:"
+              type="number"
+              [(ngModel)]="ficha.hpAtual"
+              formControlName="hpAtual">
+            </ion-input>
+            </div>
+            <ion-progress-bar [value]="setVida()" color="danger" ></ion-progress-bar>
+          </div>
+          <div>
+            <div style="color: yellow; margin-bottom: 5px;">
+              <ion-input label="XP:"
+              type="number"
+              [(ngModel)]="ficha.xpAtual"
+              formControlName="xpAtual">
+            </ion-input>
+            </div>
+            <ion-progress-bar [value]="setXp()" color="warning"></ion-progress-bar>
+          </div>
+          <div style="padding-top: 15px;">
+            <ion-col>
+              <ion-label>AC: 10</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Vel: 30ft</ion-label>
+            </ion-col>
+          </div>
+        </ion-col>
+      </ion-row>
+         <!-- Seis cards quadrados com inputs numéricos centralizados -->
+         <div class="atributos">
+           <ion-row>
+            <ion-col size="4">
+              <ion-card class="square-card">
+                <ion-card-header>
+                  <button>
+                    <ion-card-title>FOR</ion-card-title>
+                  </button>
+                </ion-card-header>
+                <ion-card-content class="centered-input">
+                  <ion-input type="number"
+                  formControlName="for"
+                  [(ngModel)]="ficha.for"
+                  class="white-bg-input" >
+                </ion-input>
+                  <div>
+                    <ion-label>{{modAtributo(sheetForm.value['for'])}} </ion-label>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="4">
+              <ion-card class="square-card">
+                <ion-card-header>
+                  <button>
+                    <ion-card-title>DES</ion-card-title>
+                  </button>
+                </ion-card-header>
+                <ion-card-content class="centered-input">
+                  <ion-input type="number"
+                  formControlName="des"
+                  [(ngModel)]="ficha.des"
+                  class="white-bg-input"></ion-input>
+                  <div>
+                    <ion-label>{{modAtributo(sheetForm.value['des'])}} </ion-label>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="4">
+              <ion-card class="square-card">
+                <ion-card-header>
+                  <button>
+                    <ion-card-title>CON</ion-card-title>
+                  </button>
+                </ion-card-header>
+                <ion-card-content class="centered-input">
+                  <ion-input type="number"
+                  formControlName="con"
+                  [(ngModel)]="ficha.con"
+                  class="white-bg-input">
+                </ion-input>
+                  <div>
+                    <ion-label>{{modAtributo(sheetForm.value['con'])}} </ion-label>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+                 </ion-row>
+                 <ion-row>
+            <ion-col size="4">
+              <ion-card class="square-card">
+                <ion-card-header>
+                  <button>
+                    <ion-card-title>INT</ion-card-title>
+                  </button>
+                </ion-card-header>
+                <ion-card-content class="centered-input">
+                  <ion-input type="number"
+                  [(ngModel)]="ficha.int"
+                  formControlName="int"
+                  class="white-bg-input">
+                </ion-input>
+                  <div>
+                    <ion-label>{{modAtributo(sheetForm.value['int'])}} </ion-label>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="4">
+              <ion-card class="square-card">
+                <ion-card-header>
+                  <button>
+                    <ion-card-title>SAB</ion-card-title>
+                  </button>
+                </ion-card-header>
+                <ion-card-content class="centered-input">
+                  <ion-input type="number"
+                  formControlName="sab"
+                  [(ngModel)]="ficha.sab"
+                  class="white-bg-input">
+                </ion-input>
+                  <div>
+                    <ion-label>{{modAtributo(sheetForm.value['sab'])}} </ion-label>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="4">
+              <ion-card class="square-card">
+                <ion-card-header>
+                  <button>
+                    <ion-card-title>CAR</ion-card-title>
+                  </button>
+                </ion-card-header>
+                <ion-card-content class="centered-input">
+                  <ion-input type="number"
+                  [(ngModel)]="ficha.car"
+                  formControlName="car"
+                  class="white-bg-input">
+                </ion-input>
+                  <div>
+                    <ion-label>{{modAtributo(sheetForm.value['car'])}} </ion-label>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            </ion-row>
+         </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    </ion-grid>
+  </form>
+  <ion-grid>
+    <form [formGroup]="periciasForm">
+      <ion-col>
+        <ion-row>
+          <!-- Lista de Habilidades -->
+          <ion-col size="12">
+            <ion-list>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="acrobacia">Acrobacia</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="arcanismo">Arcanismo</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="atletismo">Atletismo</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="atuacao">Atuacao</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="enganacao">Enganação</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="furtividade">Furtividade</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="hitoria">hitoria</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="intimidacao">Intimidação</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="intuicao">Intuição</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="investigacao">investigação</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="lidarComAnimais">Lidar com Animais</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="medicina">Medicina</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="natureza">Natureza</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="persepcao">Persepção</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="persuasao">Persuasão</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="prestidigitacao">Prestidigitação</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="religiao">Religião</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="religiao">Religião</ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-checkbox formControlName="sobrevivencia">Sobrevivencia</ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </form>
+  </ion-grid>
 </ion-content>
