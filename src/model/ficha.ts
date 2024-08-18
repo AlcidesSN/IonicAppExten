@@ -10,6 +10,7 @@ export interface Ficha {
   sab:number,
   car:number,
   pericias: Pericias,
+  equipamentos:Equipamento[],
 }
 
 export interface Pericias{
@@ -31,4 +32,12 @@ export interface Pericias{
   prestidigitacao:boolean,
   religiao:boolean,
   sobrevivencia:boolean
+}
+
+export interface Equipamento{
+  nome_Equipamento:string,
+  descricao:string,
+  dano:string,
+  alcance:string,
+  propriedades:string
 }
