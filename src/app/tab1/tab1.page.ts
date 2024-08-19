@@ -56,6 +56,12 @@ export class Tab1Page implements OnInit{
     private formBuilder: FormBuilder,
     private storageProvider:FichasService
   ) {
+    this.pegarFormumario();
+    this.initializePericias();
+    this.initializeForm();
+    this.verificarFormBranco();
+    
+    setInterval(() => {this.salvarForm();},1000)
   }
 
   setVida():number{
@@ -68,15 +74,34 @@ export class Tab1Page implements OnInit{
     return (Math.round((atributo - 10)/2)).toString();
   }
   salvarForm(){
-    this.sheetForm.value['pericias'] = this.periciasForm.value;
-    this.storageProvider.salvarPersonagem(this.sheetForm.value);
+    this.storageProvider.salvarPersonagem(this.sheetForm.value, this.ficha.pericias);
   }
   pegarFormumario(){
     this.storageProvider.getAll()
-    .then((ficha) => this.ficha = ficha[0])
+    .then((ficha) => {
+      this.ficha = ficha[0];
+      this.pericias = ficha[0].pericias;
+      this.periciasForm.value['acrobacia'] = ficha[0].pericias.acrobacia;
+      this.periciasForm.value['arcanismo'] = ficha[0].pericias.arcanismo;
+      this.periciasForm.value['atletismo'] = ficha[0].pericias.atletismo;
+      this.periciasForm.value['atuacao'] = ficha[0].pericias.atuacao;
+      this.periciasForm.value['enganacao'] = ficha[0].pericias.enganacao;
+      this.periciasForm.value['furtividade'] = ficha[0].pericias.furtividade;
+      this.periciasForm.value['hitoria'] = ficha[0].pericias.hitoria;
+      this.periciasForm.value['intimidacao'] = ficha[0].pericias.intimidacao;
+      this.periciasForm.value['intuicao'] = ficha[0].pericias.intuicao;
+      this.periciasForm.value['investigacao'] = ficha[0].pericias.investigacao;
+      this.periciasForm.value['lidarComAnimais'] = ficha[0].pericias.lidarComAnimais;
+      this.periciasForm.value['medicina'] = ficha[0].pericias.medicina;
+      this.periciasForm.value['natureza'] = ficha[0].pericias.natureza;
+      this.periciasForm.value['persepcao'] = ficha[0].pericias.persepcao;
+      this.periciasForm.value['persuasao'] = ficha[0].pericias.persuasao;
+      this.periciasForm.value['prestidigitacao'] = ficha[0].pericias.prestidigitacao;
+      this.periciasForm.value['religiao'] = ficha[0].pericias.religiao;
+      this.periciasForm.value['sobrevivencia'] = ficha[0].pericias.sobrevivencia;
+    })
     .catch((err) => alert(err));
   }
-
 
   verificarFormBranco(){
     if(this.ficha.xpNextNivel != 0 && this.ficha.xpAtual != 0){
@@ -152,11 +177,7 @@ export class Tab1Page implements OnInit{
   }
 
   ngOnInit(){
-    this.pegarFormumario();
-    this.initializePericias();
-    this.initializeForm();
-    this.verificarFormBranco();
-    setInterval(() => {this.salvarForm();},5000)
+
   }
 
 }

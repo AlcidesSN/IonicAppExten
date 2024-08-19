@@ -64,19 +64,26 @@ export class FichasService {
   get(key:string){
     return this.storage.get(key);
   }
-  salvarPersonagem(personagem:Ficha){
+  salvarPersonagem(personagem:Ficha, pericias:Pericias){
     this.getAll()
-    .then((ficha) => this.equipamento = ficha[0].equipamentos)
+    .then((ficha) => {
+      personagem.pericias = pericias;
+      personagem.equipamentos = ficha[0].equipamentos;
+      this.salvarOnBD(personagem);
+    })
     .catch((err) => alert(err));
-    personagem.equipamentos = this.equipamento;
-    this.salvarOnBD(personagem);
+    
   }
-  salvarEquipamento(Equipamento:Equipamento[]){
+  salvarEquipamento(Equipamentos:Equipamento[]){
     this.getAll()
-    .then((ficha) => this.personagem = ficha[0])
+    .then((ficha) => {
+      this.personagem = ficha[0];
+      this.personagem.pericias = ficha[0].pericias;
+      this.personagem.equipamentos = Equipamentos;
+      this.salvarOnBD(this.personagem);
+    })
     .catch((err) => alert(err));
-    this.personagem.equipamentos = Equipamento;
-    this.salvarOnBD(this.personagem);
+    
   }
   salvarOnBD(personagem:Ficha){
     this.set('ficha01', personagem);

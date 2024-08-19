@@ -18,7 +18,6 @@ export class Tab2Page implements OnInit{
 
   ngOnInit(): void {
     this.pegarEquipamentos();
-    setInterval(() => {this.storageProvider.salvarEquipamento(this.equipamento)},5000)
   }
   pegarEquipamentos(){
     this.storageProvider.getAll()
@@ -40,6 +39,7 @@ export class Tab2Page implements OnInit{
     if(role == 'cancel')
       return;
     this.equipamento.push(data);
+    this.storageProvider.salvarEquipamento(this.equipamento)
    }
    async apagarItem(i:number){
     const alert = await this.alertController.create({
@@ -52,11 +52,14 @@ export class Tab2Page implements OnInit{
         },
         {
           text: 'Excluir',
-          handler: () => this.equipamento.splice(i,1)
+          handler: () => {
+            this.equipamento.splice(i,1);
+            this.storageProvider.salvarEquipamento(this.equipamento);
+          }
         }
       ],
       });
-
+      
       await alert.present();
    }
 
