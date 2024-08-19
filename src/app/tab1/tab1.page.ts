@@ -36,16 +36,16 @@ export class Tab1Page implements OnInit{
   equipamento:Equipamento[] = []
 
   ficha:Ficha = {
-  hpAtual:0,
-  hpMax:0,
+  hpAtual:10,
+  hpMax:10,
   xpAtual:0,
-  xpNextNivel:0,
-  for:0,
-  des:0,
-  con:0,
-  int:0,
-  sab:0,
-  car:0,
+  xpNextNivel:300,
+  for:10,
+  des:10,
+  con:10,
+  int:10,
+  sab:10,
+  car:10,
   pericias: this.pericias,
   equipamentos: this.equipamento
   };
@@ -59,11 +59,9 @@ export class Tab1Page implements OnInit{
     private formBuilder: FormBuilder,
     private storageProvider:FichasService
   ) {
-    this.pegarFormumario();
     this.initializePericias();
     this.initializeForm();
-    this.verificarFormBranco();
-    
+    this.pegarFormumario();
     setInterval(() => {this.salvarForm();},1000)
   }
 
@@ -77,43 +75,23 @@ export class Tab1Page implements OnInit{
     return (Math.round((atributo - 10)/2)).toString();
   }
   salvarForm(){
-    this.storageProvider.salvarPersonagem(this.sheetForm.value, this.ficha.pericias);
+    this.storageProvider.salvarPersonagem(this.sheetForm.value,this.ficha.pericias );
   }
   pegarFormumario(){
     this.storageProvider.getAll()
     .then((ficha) => {
+      if(ficha[0]== undefined){
+        this.sheetForm.value['pericias'] = this.periciasForm.value;
+        this.storageProvider.salvarPersonagem(this.sheetForm.value, this.sheetForm.value['pericias']);
+        return;
+      }
       this.ficha = ficha[0];
-      this.pericias = ficha[0].pericias;
-      this.periciasForm.value['acrobacia'] = ficha[0].pericias.acrobacia;
-      this.periciasForm.value['arcanismo'] = ficha[0].pericias.arcanismo;
-      this.periciasForm.value['atletismo'] = ficha[0].pericias.atletismo;
-      this.periciasForm.value['atuacao'] = ficha[0].pericias.atuacao;
-      this.periciasForm.value['enganacao'] = ficha[0].pericias.enganacao;
-      this.periciasForm.value['furtividade'] = ficha[0].pericias.furtividade;
-      this.periciasForm.value['hitoria'] = ficha[0].pericias.hitoria;
-      this.periciasForm.value['intimidacao'] = ficha[0].pericias.intimidacao;
-      this.periciasForm.value['intuicao'] = ficha[0].pericias.intuicao;
-      this.periciasForm.value['investigacao'] = ficha[0].pericias.investigacao;
-      this.periciasForm.value['lidarComAnimais'] = ficha[0].pericias.lidarComAnimais;
-      this.periciasForm.value['medicina'] = ficha[0].pericias.medicina;
-      this.periciasForm.value['natureza'] = ficha[0].pericias.natureza;
-      this.periciasForm.value['persepcao'] = ficha[0].pericias.persepcao;
-      this.periciasForm.value['persuasao'] = ficha[0].pericias.persuasao;
-      this.periciasForm.value['prestidigitacao'] = ficha[0].pericias.prestidigitacao;
-      this.periciasForm.value['religiao'] = ficha[0].pericias.religiao;
-      this.periciasForm.value['sobrevivencia'] = ficha[0].pericias.sobrevivencia;
+      this.ficha.pericias = ficha[0].pericias;
     })
     .catch((err) => alert(err));
   }
 
-  verificarFormBranco(){
-    if(this.ficha.xpNextNivel != 0 && this.ficha.xpAtual != 0){
-      this.atualizarForm();
-    }
-    else{
-      this.criarForm();
-    }
-  }
+
   initializePericias(){
     this.periciasForm = this.formBuilder.group({
       acrobacia:[false,[Validators.required]],
@@ -149,7 +127,7 @@ export class Tab1Page implements OnInit{
       int:[10,[Validators.required]],
       sab:[10,[Validators.required]],
       car:[10,[Validators.required]],
-      pericias:['',[Validators.required]]
+      pericias:['',[Validators.required]],
     });
   }
   atualizarForm(){
