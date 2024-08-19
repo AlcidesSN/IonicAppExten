@@ -10,6 +10,9 @@ import { FichasService } from '../services/fichas.service';
 })
 export class Tab1Page implements OnInit{
 
+
+  //2 way data binding dos checkbox esta dando algum erro, quando inicia, mas funciona normalmente e se mudar não funciona
+  //até saber consertar deixar deste mesmo jeito.
   pericias:Pericias = {
     acrobacia:false,
     arcanismo:false,
