@@ -11,6 +11,8 @@ export interface Ficha {
   car:number,
   pericias: Pericias,
   equipamentos:Equipamento[],
+  habilidades:Habilidades[],
+  magias:Magias[]
 }
 
 export interface Pericias{
@@ -40,4 +42,21 @@ export interface Equipamento{
   dano:string,
   alcance:string,
   propriedades:string
+}
+
+export interface Habilidades{
+  nome_habilidade:string,
+  tipo:string,
+  usos:number,
+  recarga:string,
+  descricao:string,
+}
+export interface Magias{
+  nome:string,
+  circuloMagia:number,
+  conjuracao:string,
+  duracao:string,
+  componentes:string,
+  descricao:string,
+
 }

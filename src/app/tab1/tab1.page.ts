@@ -1,4 +1,4 @@
-import { Equipamento, Ficha, Pericias } from './../../model/ficha';
+import { Equipamento, Ficha, Habilidades, Magias, Pericias } from './../../model/ficha';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { FichasService } from '../services/fichas.service';
@@ -11,8 +11,7 @@ import { FichasService } from '../services/fichas.service';
 export class Tab1Page implements OnInit{
 
 
-  //2 way data binding dos checkbox esta dando algum erro, quando inicia, mas funciona normalmente e se mudar não funciona
-  //até saber consertar deixar deste mesmo jeito.
+
   pericias:Pericias = {
     acrobacia:false,
     arcanismo:false,
@@ -33,7 +32,10 @@ export class Tab1Page implements OnInit{
     religiao:false,
     sobrevivencia:false
   };
-  equipamento:Equipamento[] = []
+  magias:Magias[] = [];
+  equipamento:Equipamento[] = [];
+  habilidades:Habilidades[] = [];
+  
 
   ficha:Ficha = {
   hpAtual:10,
@@ -47,7 +49,9 @@ export class Tab1Page implements OnInit{
   sab:10,
   car:10,
   pericias: this.pericias,
-  equipamentos: this.equipamento
+  equipamentos: this.equipamento,
+  habilidades: this.habilidades,
+  magias: this.magias
   };
 
   sheetForm:FormGroup = new FormGroup({});

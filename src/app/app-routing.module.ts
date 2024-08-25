@@ -13,7 +13,16 @@ const routes: Routes = [
   {
     path: 'criar-equipamento',
     loadChildren: () => import('./Modal/criar-equipamento/criar-equipamento.module').then( m => m.CriarEquipamentoPageModule)
+  },
+  {
+    path: 'criar-habilidade',
+    loadChildren: () => import('./Modal/criar-habilidade/criar-habilidade.module').then( m => m.CriarHabilidadePageModule)
+  },  {
+    path: 'criar-magia',
+    loadChildren: () => import('./Modal/criar-magia/criar-magia.module').then( m => m.CriarMagiaPageModule)
   }
+
+
 ];
 @NgModule({
   imports: [

@@ -1,4 +1,4 @@
-import { Equipamento } from './../../model/ficha';
+import { Equipamento, Habilidades, Magias } from './../../model/ficha';
 import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage-angular';
@@ -32,7 +32,9 @@ export class FichasService {
     religiao:false,
     sobrevivencia:false
   };
-  equipamento:Equipamento[] = []
+  equipamento:Equipamento[] = [];
+  habilidades:Habilidades[] = [];
+  magias:Magias[] = [];
 
    personagem:Ficha = {
     hpAtual:0,
@@ -46,7 +48,9 @@ export class FichasService {
     sab:0,
     car:0,
     pericias: this.pericias,
-    equipamentos: this.equipamento
+    equipamentos: this.equipamento,
+    habilidades: this.habilidades,
+    magias: this.magias
    };
 
   getAll():Promise<Ficha[]>{
@@ -75,6 +79,8 @@ export class FichasService {
       this.personagem = personagem;
       this.personagem.pericias = pericias;
       this.personagem.equipamentos = ficha[0].equipamentos;
+      this.personagem.habilidades = ficha[0].habilidades;
+      this.personagem.magias = ficha[0].magias;
 
       this.salvarOnBD(this.personagem);
     })
@@ -87,8 +93,26 @@ export class FichasService {
       this.salvarOnBD(ficha[0]);
     })
     .catch((err) => alert(err));
-
   }
+
+  salvarHabilidades(habilidades:Habilidades[]){
+    this.getAll()
+    .then((ficha) => {
+      ficha[0].habilidades = habilidades;
+      this.salvarOnBD(ficha[0]);
+    })
+    .catch((err) => alert(err));
+  }
+
+  salvarMagias(magias:Magias[]){
+    this.getAll()
+    .then((ficha) => {
+      ficha[0].magias = magias;
+      this.salvarOnBD(ficha[0]);
+    })
+    .catch((err) => alert(err));
+  }
+
   salvarOnBD(personagem:Ficha){
     console.log(personagem.equipamentos)
     this.set('ficha01', personagem);
