@@ -4,10 +4,12 @@
       <ion-row>
         <!-- Imagem do personagem arredondada -->
         <ion-col size="6">
-            <ion-img
-              [src]="imagemPersonagem"
+            <ion-button fill="clear" (click)="mudarImagem()">
+              <ion-img
+              [src]="ficha.imagemPersonagem"
               alt="Imagem do personagem"
             ></ion-img>
+          </ion-button>
         </ion-col>
         <!-- Card com HP, Mana e XP alinhado à direita -->
         <ion-col size="6">

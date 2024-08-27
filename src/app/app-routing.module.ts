@@ -20,6 +20,10 @@ const routes: Routes = [
   },  {
     path: 'criar-magia',
     loadChildren: () => import('./Modal/criar-magia/criar-magia.module').then( m => m.CriarMagiaPageModule)
+  },
+  {
+    path: 'image-upload',
+    loadChildren: () => import('./Modal/image-upload/image-upload.module').then( m => m.ImageUploadPageModule)
   }
 
 

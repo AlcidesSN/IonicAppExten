@@ -1,7 +1,12 @@
 ion-img::part(image){
+  border-radius: 100%;
+  
+}
+ion-img{
+  width: 170px;
+  height: 180px;
   border-radius: 50%;
-  width: 100%;
-
+  margin-bottom: 15px;
 }
 
 /* Estilos para o card da imagem do personagem */
@@ -62,7 +67,7 @@ ion-img::part(image){
   margin-top: 12%;
   color: black;
 }
-.square-card button{
+.square-card button, .imagemPersonagemBNT{
   background-color: #00000000;
 }
 .square-card ion-card-title:active{

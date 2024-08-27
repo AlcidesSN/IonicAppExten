@@ -3,6 +3,7 @@ export interface Ficha {
   hpMax:number,
   xpAtual:number,
   xpNextNivel:number,
+  imagemPersonagem:string,
   for:number,
   des:number,
   con:number,

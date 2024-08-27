@@ -41,6 +41,7 @@ export class FichasService {
     hpMax:0,
     xpAtual:0,
     xpNextNivel:0,
+    imagemPersonagem: '',
     for:0,
     des:0,
     con:0,
@@ -114,7 +115,7 @@ export class FichasService {
   }
 
   salvarOnBD(personagem:Ficha){
-    console.log(personagem.equipamentos)
+    //console.log(personagem.equipamentos)
     this.set('ficha01', personagem);
   }
 

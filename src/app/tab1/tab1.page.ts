@@ -2,6 +2,8 @@ import { Equipamento, Ficha, Habilidades, Magias, Pericias } from './../../model
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { FichasService } from '../services/fichas.service';
+import { ModalController } from '@ionic/angular';
+import { ImageUploadPage } from '../Modal/image-upload/image-upload.page';
 
 @Component({
   selector: 'app-tab1',
@@ -10,7 +12,7 @@ import { FichasService } from '../services/fichas.service';
 })
 export class Tab1Page implements OnInit{
 
-
+  img:string = '';
 
   pericias:Pericias = {
     acrobacia:false,
@@ -42,6 +44,7 @@ export class Tab1Page implements OnInit{
   hpMax:10,
   xpAtual:0,
   xpNextNivel:300,
+  imagemPersonagem: "https://ionicframework.com/docs/img/demos/avatar.svg",
   for:10,
   des:10,
   con:10,
@@ -57,11 +60,11 @@ export class Tab1Page implements OnInit{
   sheetForm:FormGroup = new FormGroup({});
   periciasForm:FormGroup = new FormGroup({});
 
-  imagemPersonagem:string = "https://ionicframework.com/docs/img/demos/avatar.svg";
 
   constructor(
     private formBuilder: FormBuilder,
-    private storageProvider:FichasService
+    private storageProvider:FichasService,
+    private modalCtrl: ModalController
   ) {
     this.initializePericias();
     this.initializeForm();
@@ -91,10 +94,26 @@ export class Tab1Page implements OnInit{
       }
       this.ficha = ficha[0];
       this.ficha.pericias = ficha[0].pericias;
+      this.ficha.imagemPersonagem = ficha[0].imagemPersonagem;
+      this.sheetForm.value['imagemPersonagem'] = ficha[0].imagemPersonagem;
+      console.log(this.sheetForm.value)
     })
-    .catch((err) => alert(err));
+    console.log(this.sheetForm.value)
+
   }
 
+  async mudarImagem(){
+    const modal = await this.modalCtrl.create({
+      component: ImageUploadPage,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if(role == 'cancel')
+      return;
+    this.ficha.imagemPersonagem = data;
+    this.sheetForm.value['imagemPersonagem'] = data;
+   }
 
   initializePericias(){
     this.periciasForm = this.formBuilder.group({
@@ -125,6 +144,7 @@ export class Tab1Page implements OnInit{
       hpMax:[10,[Validators.required]],
       xpAtual:[0,[Validators.required]],
       xpNextNivel:[300,[Validators.required]],
+      imagemPersonagem: ["https://ionicframework.com/docs/img/demos/avatar.svg",[Validators.required]],
       for:[10,[Validators.required]],
       des:[10,[Validators.required]],
       con:[10,[Validators.required]],
