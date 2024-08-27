@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Camera ,CameraResultType ,CameraSource, Photo } from '@Capacitor/camera';
-import { Directory, Filesystem } from '@capacitor/filesystem';
+import { Directory, FileInfo, Filesystem } from '@capacitor/filesystem';
 import { LoadingController, ModalController, Platform } from '@ionic/angular';
 
 const IMGE_DIR = 'stored-images';
@@ -34,8 +34,15 @@ export class ImageUploadPage implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  confirm() {
-    return this.modalCtrl.dismiss(this.image[0].data, 'confirm');
+  confirm(data:LocalFile) {
+    return this.modalCtrl.dismiss(data.data, 'confirm');
+  }
+  async excluir(data:LocalFile){
+    await Filesystem.deleteFile({
+      directory:Directory.Data,
+      path:data.path
+    });
+    this.loadFiles();
   }
 
   async loadFiles(){
@@ -49,8 +56,8 @@ export class ImageUploadPage implements OnInit {
       directory: Directory.Data,
       path: IMGE_DIR
     }).then(result => {
-      console.log('Here: ' , result.files[0]);
-      this.loadFileData(result.files[0].name);
+      console.log('Here: ' , result.files);
+      this.loadFileData(result.files);
 
     },async err=> {
       await Filesystem.mkdir({
@@ -62,18 +69,20 @@ export class ImageUploadPage implements OnInit {
     })
   }
 
-  async loadFileData(fileName:string){
-    const filePath = `${IMGE_DIR}/${fileName}`;
+  async loadFileData(fileName: FileInfo[]){
+    for(let f of fileName){
+    const filePath = `${IMGE_DIR}/${f.name}`;
 
     const readFile = await Filesystem.readFile({
       directory: Directory.Data,
       path:filePath
     });
     this.image.push({
-      name: fileName,
+      name: f.name,
       path: filePath,
       data: `data:image/jpeg;base64,${readFile.data}`
     })
+  }
   }
 
   async selectImages(){
@@ -94,7 +103,7 @@ export class ImageUploadPage implements OnInit {
     const base64Data = await this.readAsBase64(photo);
     console.log(base64Data);
 
-    const fileName = 'personagem.jpg';
+    const fileName = new Date().getTime() + 'jpeg';
     const savedFile = await Filesystem.writeFile({
       directory: Directory.Data,
       path: `${IMGE_DIR}/${fileName}`,

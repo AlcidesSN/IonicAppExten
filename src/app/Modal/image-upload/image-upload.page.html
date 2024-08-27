@@ -3,10 +3,6 @@
     <ion-buttons slot="start">
       <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
-
-    <ion-buttons slot="end">
-      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -22,10 +18,17 @@
         <ion-thumbnail slot="start">
           <ion-img [src]="file.data"></ion-img>
         </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          {{file.name}}
+        </ion-label>
+        <ion-button slot="end" fill="clear" (click)="confirm(file)">
+          <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+        </ion-button>
+        <ion-button slot="end" fill="clear" (click)="excluir(file)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
-
-
 </ion-content>
 <ion-footer>
   <ion-toolbar>
