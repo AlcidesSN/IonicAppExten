@@ -37,10 +37,16 @@ export class FichasService {
   magias:Magias[] = [];
 
    personagem:Ficha = {
+    nome: '',
+    classe: '',
+    raca: '',
+    nivel: 0,
     hpAtual:0,
     hpMax:0,
     xpAtual:0,
     xpNextNivel:0,
+    ac: 0,
+    vel: '',
     imagemPersonagem: '',
     for:0,
     des:0,
@@ -70,6 +76,24 @@ export class FichasService {
     return this.storage.get(key);
   }
   salvarPersonagem(personagem:Ficha, pericias:Pericias){
+    this.getAll()
+    .then((ficha) => {
+      if(ficha[0]== undefined){
+        console.log(this.personagem)
+        this.salvarOnBD(this.personagem);
+        return;
+      }
+      this.personagem = personagem;
+      this.personagem.pericias = pericias;
+      this.personagem.equipamentos = ficha[0].equipamentos;
+      this.personagem.habilidades = ficha[0].habilidades;
+      this.personagem.magias = ficha[0].magias;
+
+      this.salvarOnBD(this.personagem);
+    })
+    //.catch((err) => alert(err));
+  }
+  salvarPersonageml(personagem:Ficha, pericias:Pericias, nome:string, classe:string, nivel:string){
     this.getAll()
     .then((ficha) => {
       if(ficha[0]== undefined){

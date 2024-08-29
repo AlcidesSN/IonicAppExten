@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FichasService } from '../services/fichas.service';
 import { ModalController } from '@ionic/angular';
 import { ImageUploadPage } from '../Modal/image-upload/image-upload.page';
+import { ConfigBasicasPage } from '../Modal/config-basicas/config-basicas.page';
 
 @Component({
   selector: 'app-tab1',
@@ -40,7 +41,13 @@ export class Tab1Page implements OnInit{
   
 
   ficha:Ficha = {
+  nome: '',
+  classe: '',
+  nivel: 0,
+  raca: '',
   hpAtual:10,
+  ac: 10,
+  vel: '30ft',
   hpMax:10,
   xpAtual:0,
   xpNextNivel:300,
@@ -73,34 +80,87 @@ export class Tab1Page implements OnInit{
   }
 
   setVida():number{
-    return this.sheetForm.value['hpAtual'] / this.sheetForm.value['hpMax'];
+    return this.ficha.hpAtual / this.ficha.hpMax;
   }
   setXp():number{
-    return this.sheetForm.value['xpAtual'] / this.sheetForm.value['xpNextNivel'];
+    return this.ficha.xpAtual / this.ficha.xpNextNivel;
   }
   modAtributo(atributo:number):string{
     return (Math.round((atributo - 10)/2)).toString();
   }
   salvarForm(){
-    this.storageProvider.salvarPersonagem(this.sheetForm.value,this.ficha.pericias );
+    this.storageProvider.salvarPersonagem(this.ficha,this.ficha.pericias );
   }
   pegarFormumario(){
     this.storageProvider.getAll()
     .then((ficha) => {
-      if(ficha[0]== undefined){
-        this.sheetForm.value['pericias'] = this.periciasForm.value;
-        this.storageProvider.salvarPersonagem(this.sheetForm.value, this.sheetForm.value['pericias']);
-        return;
-      }
       this.ficha = ficha[0];
-      this.ficha.pericias = ficha[0].pericias;
-      this.ficha.imagemPersonagem = ficha[0].imagemPersonagem;
       this.sheetForm.value['imagemPersonagem'] = ficha[0].imagemPersonagem;
-      console.log(this.sheetForm.value)
+      this.ficha.imagemPersonagem = ficha[0].imagemPersonagem;
+      this.ficha.pericias = ficha[0].pericias;
+    }).catch(()=>{
+      this.sheetForm.value['pericias'] = this.periciasForm.value;
+      this.storageProvider.salvarPersonagem(this.sheetForm.value, this.sheetForm.value['pericias']);
+      return;
     })
-    console.log(this.sheetForm.value)
-
   }
+  modBP():number {
+    if (this.ficha.nivel <= 1 && this.ficha.nivel <= 4) {
+      return 2;
+    }else if (this.ficha.nivel <= 5 && this.ficha.nivel <= 8) {
+      return 3;
+    }else if (this.ficha.nivel <= 9 && this.ficha.nivel <= 12) {
+      return 4;
+    }else if (this.ficha.nivel <= 13 && this.ficha.nivel <= 16) {
+      return 5;
+    }else{
+      return 6;
+    }
+  }
+  async mudarConfigBasicas(){
+    const modal = await this.modalCtrl.create({
+      component: ConfigBasicasPage,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if(role == 'cancel')
+      return;
+    this.ficha.nome = data.nome;
+    this.ficha.raca = data.raca;
+    this.ficha.classe = data.classe;
+    this.ficha.nivel = data.nivel;
+    this.ficha.hpMax = data.maxHp;
+    this.ficha.ac = data.ac;
+    this.ficha.vel = data.vel;
+    this.changeXpNextLevel();
+   }
+
+   changeXpNextLevel(){
+    const xpPerNivel:number[] = [
+      0,
+      300,
+      900,
+      2700,
+      6500,
+      14000,
+      23000,
+      34000,
+      48000,
+      64000,
+      85000 ,
+      100000,
+      120000,
+      140000,
+      165000,
+      195000,
+      225000,
+      265000,
+      305000,
+      355000,
+    ];
+    this.ficha.xpNextNivel = xpPerNivel[this.ficha.nivel];
+   }
 
   async mudarImagem(){
     const modal = await this.modalCtrl.create({
@@ -111,8 +171,8 @@ export class Tab1Page implements OnInit{
     const { data, role } = await modal.onWillDismiss();
     if(role == 'cancel')
       return;
-    this.ficha.imagemPersonagem = data;
-    this.sheetForm.value['imagemPersonagem'] = data;
+    this.ficha.imagemPersonagem = data.data;
+    this.sheetForm.value['imagemPersonagem'] = data.data;
    }
 
   initializePericias(){
@@ -140,11 +200,15 @@ export class Tab1Page implements OnInit{
   }
   initializeForm(){
     this.sheetForm = this.formBuilder.group({
+      nome:['',[Validators.required]],
+      classe:['',[Validators.required]],
+      nivel:['',[Validators.required]],
+      raca:['',[Validators.required]],
       hpAtual:[10,[Validators.required]],
       hpMax:[10,[Validators.required]],
       xpAtual:[0,[Validators.required]],
       xpNextNivel:[300,[Validators.required]],
-      imagemPersonagem: ["https://ionicframework.com/docs/img/demos/avatar.svg",[Validators.required]],
+      imagemPersonagem:["https://ionicframework.com/docs/img/demos/avatar.svg",[Validators.required]],
       for:[10,[Validators.required]],
       des:[10,[Validators.required]],
       con:[10,[Validators.required]],
@@ -155,10 +219,15 @@ export class Tab1Page implements OnInit{
     });
   }
   atualizarForm(){
+    this.sheetForm.value['nome'] = this.ficha.nome;
+    this.sheetForm.value['classe'] = this.ficha.classe;
+    this.sheetForm.value['nivel'] = this.ficha.nivel;
+    this.sheetForm.value['raca'] = this.ficha.raca;
     this.sheetForm.value['hpAtual'] = this.ficha.hpAtual;
     this.sheetForm.value['hpMax'] = this.ficha.hpMax;
     this.sheetForm.value['xpAtual'] = this.ficha.xpAtual;
     this.sheetForm.value['xpNextNivel'] = this.ficha.xpNextNivel;
+    this.sheetForm.value['imagemPersonagem'] = this.ficha.imagemPersonagem;
     this.sheetForm.value['for'] = this.ficha.for;
     this.sheetForm.value['des'] = this.ficha.des;
     this.sheetForm.value['con'] = this.ficha.con;

@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'image-upload',
     loadChildren: () => import('./Modal/image-upload/image-upload.module').then( m => m.ImageUploadPageModule)
+  },
+  {
+    path: 'config-basicas',
+    loadChildren: () => import('./Modal/config-basicas/config-basicas.module').then( m => m.ConfigBasicasPageModule)
   }
 
 

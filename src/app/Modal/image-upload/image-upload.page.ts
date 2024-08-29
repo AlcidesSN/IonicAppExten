@@ -35,7 +35,7 @@ export class ImageUploadPage implements OnInit {
   }
 
   confirm(data:LocalFile) {
-    return this.modalCtrl.dismiss(data.data, 'confirm');
+    return this.modalCtrl.dismiss(data, 'confirm');
   }
   async excluir(data:LocalFile){
     await Filesystem.deleteFile({

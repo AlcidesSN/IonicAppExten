@@ -27,17 +27,17 @@ export class Tab3Page implements OnInit {
 
   habilidades:Habilidades[] = [];
 
-async openCriarHabilidade(){
-  const modal = await this.modalCtrl.create({
-    component: CriarHabilidadePage,
-  });
-  modal.present();
+  async openCriarHabilidade(){
+    const modal = await this.modalCtrl.create({
+      component: CriarHabilidadePage,
+    });
+    modal.present();
 
-  const { data, role } = await modal.onWillDismiss();
-  if(role == 'cancel')
-    return;
-  this.habilidades.push(data);
-  this.storageProvider.salvarHabilidades(this.habilidades)
+    const { data, role } = await modal.onWillDismiss();
+    if(role == 'cancel')
+      return;
+    this.habilidades.push(data);
+    this.storageProvider.salvarHabilidades(this.habilidades)
  }
  
  async apagarItem(i:number){
@@ -59,6 +59,6 @@ async openCriarHabilidade(){
     ],
     });
     
-    await alert.present();
+  await alert.present();
  }
 }

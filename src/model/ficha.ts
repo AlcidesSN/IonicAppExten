@@ -1,5 +1,11 @@
 export interface Ficha {
+  nome:string,
+  classe:string,
+  nivel:number,
+  raca:string,
   hpAtual:number,
+  ac:number,
+  vel:string
   hpMax:number,
   xpAtual:number,
   xpNextNivel:number,
