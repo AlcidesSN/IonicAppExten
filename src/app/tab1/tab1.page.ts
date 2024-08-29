@@ -138,7 +138,6 @@ export class Tab1Page implements OnInit{
 
    changeXpNextLevel(){
     const xpPerNivel:number[] = [
-      0,
       300,
       900,
       2700,
@@ -158,8 +157,9 @@ export class Tab1Page implements OnInit{
       265000,
       305000,
       355000,
+      355000
     ];
-    this.ficha.xpNextNivel = xpPerNivel[this.ficha.nivel];
+    this.ficha.xpNextNivel = xpPerNivel[this.ficha.nivel-1];
    }
 
   async mudarImagem(){
