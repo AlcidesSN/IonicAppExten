@@ -89,19 +89,20 @@ export class Tab1Page implements OnInit{
     return (Math.round((atributo - 10)/2)).toString();
   }
   salvarForm(){
-    this.storageProvider.salvarPersonagem(this.ficha,this.ficha.pericias );
+    this.storageProvider.salvarPersonagem(this.ficha,this.ficha.pericias);
   }
   pegarFormumario(){
     this.storageProvider.getAll()
     .then((ficha) => {
+      if(ficha[0]== undefined){
+        this.sheetForm.value['pericias'] = this.periciasForm.value;
+        this.storageProvider.salvarPersonagem(this.sheetForm.value, this.sheetForm.value['pericias']);
+        return;
+      }
       this.ficha = ficha[0];
       this.sheetForm.value['imagemPersonagem'] = ficha[0].imagemPersonagem;
       this.ficha.imagemPersonagem = ficha[0].imagemPersonagem;
       this.ficha.pericias = ficha[0].pericias;
-    }).catch(()=>{
-      this.sheetForm.value['pericias'] = this.periciasForm.value;
-      this.storageProvider.salvarPersonagem(this.sheetForm.value, this.sheetForm.value['pericias']);
-      return;
     })
   }
   modBP():number {
