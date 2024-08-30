@@ -3,6 +3,8 @@ import { CriarEquipamentoPage } from '../Modal/criar-equipamento/criar-equipamen
 import { Equipamento } from './../../model/ficha';
 import { Component, OnInit } from '@angular/core';
 import { FichasService } from '../services/fichas.service';
+import { RolldicesService } from '../services/rolldices.service';
+import { Tab1Page } from '../tab1/tab1.page';
 
 @Component({
   selector: 'app-tab2',
@@ -14,7 +16,8 @@ export class Tab2Page implements OnInit{
   constructor(
     private modalCtrl:ModalController,
     private alertController:AlertController,
-    private storageProvider:FichasService) {}
+    private storageProvider:FichasService,
+    private diceRoler:RolldicesService,) {}
 
   ngOnInit(): void {
     this.pegarEquipamentos();
@@ -26,7 +29,7 @@ export class Tab2Page implements OnInit{
   }
 
   equipamento:Equipamento[] = [];
-
+  nivel:number = 0;
 
 
    async openCriarEquipamento(){
@@ -40,6 +43,57 @@ export class Tab2Page implements OnInit{
       return;
     this.equipamento.push(data);
     this.storageProvider.salvarEquipamento(this.equipamento)
+   }
+    modBP():any {
+    this.storageProvider.getAll()
+    .then((ficha) => {
+      this.nivel = ficha[0].nivel
+
+    });
+    if (this.nivel <= 1 && this.nivel <= 4) {
+      return 2;
+    }else if (this.nivel <= 5 && this.nivel <= 8) {
+      return 3;
+    }else if (this.nivel <= 9 && this.nivel <= 12) {
+      return 4;
+    }else if (this.nivel <= 13 && this.nivel <= 16) {
+      return 5;
+    }else{
+      return 6;
+    }
+    
+  }
+   
+   async rolarDado(i:number){
+    let rsp:boolean = false;
+    for (let index = 0; index < this.equipamento[i].propriedades.length; index++) {
+      if (this.equipamento[i].propriedades[index] == 'Acuidade') {
+        const alert = await this.alertController.create({
+          header: 'Arma com Acuidade',
+          message: 'Deseja atacar com força ou destreza?',
+          buttons: [
+            {
+              text: 'Força',
+              handler: () => {
+                this.storageProvider.getAll()
+                .then((ficha) => this.diceRoler.rolarDado('1d20',((Math.round((ficha[0].for - 10)/2))) + this.modBP()) );
+              }
+            },
+            {
+              text: 'Destreza',
+              handler: () => {
+                this.storageProvider.getAll()
+                .then((ficha) => this.diceRoler.rolarDado('1d20',((Math.round((ficha[0].des - 10)/2))) + this.modBP()) );
+              }
+            }
+          ],
+          });
+          await alert.present();
+          return;
+        }
+      
+    }
+    
    }
    async apagarItem(i:number){
     const alert = await this.alertController.create({
