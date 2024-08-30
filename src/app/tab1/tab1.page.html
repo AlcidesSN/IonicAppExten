@@ -206,109 +206,145 @@
           <ion-col size="12">
             <ion-list>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.acrobacia, modAtributo(ficha.des) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.acrobacia"
                 formControlName="acrobacia">Acrobacia
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.arcanismo, modAtributo(ficha.int) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.arcanismo"
                 formControlName="arcanismo">Arcanismo
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.atletismo, modAtributo(ficha.for) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.atletismo"
                 formControlName="atletismo">Atletismo
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.atuacao, modAtributo(ficha.car) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.atuacao"
                 formControlName="atuacao">Atuacao
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.enganacao, modAtributo(ficha.car) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.enganacao"
                 formControlName="enganacao">Enganação
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.furtividade, modAtributo(ficha.des) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.furtividade"
                 formControlName="furtividade">Furtividade
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.hitoria, modAtributo(ficha.int) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.hitoria"
                 formControlName="hitoria">hitoria
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.intimidacao, modAtributo(ficha.car) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.intimidacao"
                 formControlName="intimidacao">Intimidação
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.intuicao, modAtributo(ficha.sab) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.intuicao"
                 formControlName="intuicao">Intuição
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.investigacao, modAtributo(ficha.sab) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.investigacao"
                 formControlName="investigacao">investigação
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.lidarComAnimais, modAtributo(ficha.sab) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.lidarComAnimais"
                 formControlName="lidarComAnimais">Lidar com Animais
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.medicina, modAtributo(ficha.sab) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.medicina"
                 formControlName="medicina">Medicina
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.natureza, modAtributo(ficha.int) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.natureza"
                 formControlName="natureza">Natureza
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.persepcao, modAtributo(ficha.sab) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.persepcao"
                 formControlName="persepcao">Persepção
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.persuasao, modAtributo(ficha.car) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.persuasao"
                 formControlName="persuasao">Persuasão
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.prestidigitacao, modAtributo(ficha.des) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.prestidigitacao"
                 formControlName="prestidigitacao">Prestidigitação
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.religiao, modAtributo(ficha.int) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.religiao"
                 formControlName="religiao">Religião
               </ion-checkbox>
               </ion-item>
               <ion-item>
-                <ion-icon aria-hidden="true" name="dice-outline" class="icon-spacing"></ion-icon>
+                <ion-button fill="clear" classe="dice-bnt" (click)="rolldice(ficha.pericias.sobrevivencia, modAtributo(ficha.sab) )">
+                  <ion-icon  aria-hidden="true" name="dice-outline"></ion-icon>
+                </ion-button>
                 <ion-checkbox   [(ngModel)]="ficha.pericias.sobrevivencia"
                 formControlName="sobrevivencia">Sobrevivencia
               </ion-checkbox>

@@ -5,6 +5,7 @@ import { FichasService } from '../services/fichas.service';
 import { ModalController } from '@ionic/angular';
 import { ImageUploadPage } from '../Modal/image-upload/image-upload.page';
 import { ConfigBasicasPage } from '../Modal/config-basicas/config-basicas.page';
+import { RolldicesService } from '../services/rolldices.service';
 
 @Component({
   selector: 'app-tab1',
@@ -71,7 +72,8 @@ export class Tab1Page implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private storageProvider:FichasService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private diceRoler:RolldicesService
   ) {
     this.initializePericias();
     this.initializeForm();
@@ -85,8 +87,8 @@ export class Tab1Page implements OnInit{
   setXp():number{
     return this.ficha.xpAtual / this.ficha.xpNextNivel;
   }
-  modAtributo(atributo:number):string{
-    return (Math.round((atributo - 10)/2)).toString();
+  modAtributo(atributo:number):number{
+    return (Math.round((atributo - 10)/2));
   }
   salvarForm(){
     this.storageProvider.salvarPersonagem(this.ficha,this.ficha.pericias);
@@ -174,6 +176,15 @@ export class Tab1Page implements OnInit{
       return;
     this.ficha.imagemPersonagem = data.data;
     this.sheetForm.value['imagemPersonagem'] = data.data;
+   }
+
+   rolldice(treidado:boolean, atributo:number){
+      const treinamento = this.modBP();
+      if(treidado){
+        this.diceRoler.rolarDado('1d20',atributo + treinamento);
+      } else {
+        this.diceRoler.rolarDado('1d20',atributo);
+      }
    }
 
   initializePericias(){
