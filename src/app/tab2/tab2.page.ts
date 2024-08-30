@@ -65,7 +65,6 @@ export class Tab2Page implements OnInit{
   }
    
    async rolarDado(i:number){
-    let rsp:boolean = false;
     for (let index = 0; index < this.equipamento[i].propriedades.length; index++) {
       if (this.equipamento[i].propriedades[index] == 'Acuidade') {
         const alert = await this.alertController.create({
@@ -76,14 +75,14 @@ export class Tab2Page implements OnInit{
               text: 'Força',
               handler: () => {
                 this.storageProvider.getAll()
-                .then((ficha) => this.diceRoler.rolarDado('1d20',((Math.round((ficha[0].for - 10)/2))) + this.modBP()) );
+                .then((ficha) => this.diceRoler.rolarDado(this.equipamento[i].dano,(Math.round((ficha[0].for - 10)/2))) );
               }
             },
             {
               text: 'Destreza',
               handler: () => {
                 this.storageProvider.getAll()
-                .then((ficha) => this.diceRoler.rolarDado('1d20',((Math.round((ficha[0].des - 10)/2))) + this.modBP()) );
+                .then((ficha) => this.diceRoler.rolarDado(this.equipamento[i].dano,(Math.round((ficha[0].des - 10)/2))) );
               }
             }
           ],
@@ -91,8 +90,10 @@ export class Tab2Page implements OnInit{
           await alert.present();
           return;
         }
-      
+
     }
+    this.storageProvider.getAll()
+    .then((ficha) => this.diceRoler.rolarDado(this.equipamento[i].dano,(Math.round((ficha[0].for - 10)/2))) );
     
    }
    async apagarItem(i:number){
