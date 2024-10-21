@@ -39,7 +39,7 @@ export class Tab1Page implements OnInit{
   magias:Magias[] = [];
   equipamento:Equipamento[] = [];
   habilidades:Habilidades[] = [];
-  
+
 
   ficha:Ficha = {
   nome: '',
@@ -88,7 +88,7 @@ export class Tab1Page implements OnInit{
     return this.ficha.xpAtual / this.ficha.xpNextNivel;
   }
   modAtributo(atributo:number):number{
-    return (Math.round((atributo - 10)/2));
+    return (Math.floor((atributo - 10)/2));
   }
   salvarForm(){
     this.storageProvider.salvarPersonagem(this.ficha,this.ficha.pericias);
